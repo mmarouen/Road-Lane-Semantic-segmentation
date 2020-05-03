@@ -16,8 +16,7 @@ def train_model(config: ConfigReader):
     data_handler = DataUtils(config.data_path, config.weights_path)
     print("nclass %i" %config.n_class)
     X_train,y_train = data_handler.get("data/training", config.n_class, config.input_height, config.input_width)
-    print("training data shape: {0}".format(X_train.shape))
-    '''
+    
     if config.augment_data:
         X_train,y_train = data_handler.augment_training_data(X_train,y_train, config.n_class, config.input_height, config.input_width)
     print("training data shape: {0}".format(X.shape))
@@ -27,7 +26,6 @@ def train_model(config: ConfigReader):
         model_version = 8
     fcn_model = FcnModel(config.n_class, config.input_height, config.input_width, config.weights_path)
     print(fcn_model.model.summary())
-    '''
 
 def main():
     args = parse_arguments()
