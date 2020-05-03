@@ -28,7 +28,7 @@ def train_model(config: ConfigReader):
     if config.model_name =="fcn8":
         model_version = 8
     fcn_model = FcnModel(config.n_class, config.input_height, config.input_width, config.weights_path)
-    fcn_model.model.compile(loss='binary_crossentropy',optimizer=optimizers.Adam(lr=1e-4),metrics=['acc'])
+    fcn_model.model.compile(loss='binary_crossentropy',optimizer=Adam(lr=1e-4),metrics=['acc'])
     history = fcn_model.model.fit(x=X_train, y=y_train, epochs=20, batch_size=10, validation_data=(X_val, y_val))
 
     acc = history.history['acc']
