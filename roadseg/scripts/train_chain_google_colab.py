@@ -1,7 +1,7 @@
 import os
 import argparse
 from keras.optimizers import Adam
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from roadseg.utils.config_loader import ConfigReader
 from roadseg.utils.data_utils import DataUtils
 from roadseg.models.fcn_models import FcnModel
@@ -29,7 +29,7 @@ def train_model(config: ConfigReader):
         model_version = 8
     fcn_model = FcnModel(config.n_class, config.input_height, config.input_width, config.weights_path)
     fcn_model.model.compile(loss='binary_crossentropy',optimizer=Adam(lr=1e-4),metrics=['acc'])
-    history = fcn_model.model.fit(x=X_train, y=y_train, epochs=20, batch_size=10, validation_data=(X_val, y_val))
+    history = fcn_model.model.fit(x=X_train, y=y_train, epochs=10, batch_size=10, validation_data=(X_val, y_val))
 
     acc = history.history['acc']
     val_acc = history.history['val_acc']
