@@ -13,7 +13,7 @@ class DataUtils():
   
   def get(self, data_folder, n_classes, input_height, input_width):
     script_path = os.path.join(os.getcwd(),"load_from_gdrive.sh")
-    subprocess.call("sudo %s %s %s"%(script_path, self.data_url, self.weights_url), shell=True)
+    subprocess.call("%s %s %s"%(script_path, self.data_url, self.weights_url), shell=True)
     image_paths = glob(os.path.join(data_folder, 'image_2', '*.png'))
     label_paths = {
         re.sub(r'_(lane|road)_', '_', os.path.basename(path)): path
