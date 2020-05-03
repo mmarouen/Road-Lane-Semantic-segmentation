@@ -32,7 +32,7 @@ def train_model(config: ConfigReader):
 def main():
     args = parse_arguments()
     train_config = ConfigReader(args.config)
-    #train_model(train_config)
+    train_model(train_config)
 
 if __name__ == '__main__':
     main()
