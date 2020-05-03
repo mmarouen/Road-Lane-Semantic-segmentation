@@ -89,7 +89,7 @@ class FcnModel():
         im_pred=np.asarray(im_pred,np.uint8)
         return im_bgd,im_pred
     
-    def fit(self, X_train, y_train, X_val, y_val optimizer, lr):
+    def fit(self, X_train, y_train, X_val, y_val, optimizer, lr):
         if optimizer == "Adam":
             self.model.compile(loss='binary_crossentropy',optimizer=Adam(lr=lr),metrics=['acc'])
         history = self.model.fit(x=X_train, y=y_train, epochs=10, batch_size=10, validation_data=(X_val, y_val))
