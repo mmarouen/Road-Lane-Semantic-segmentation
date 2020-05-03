@@ -26,7 +26,7 @@ def train_model(config: ConfigReader):
     if config.model_name =="fcn8":
         model_version = 8
     fcn_model = FcnModel(config.n_class, config.input_height, config.input_width, config.weights_path)
-    history = fcn_model.fit(config.optimizer, config.lr)
+    history = fcn_model.fit(X_train, y_train, X_val, y_val, config.optimizer, config.lr)
     model_path = os.path.join(os.getcwd(),"models")
     os.mkdir(model_path)
     fcn_model.model.save(os.path.join(model_path,"fcn32.h5"))
