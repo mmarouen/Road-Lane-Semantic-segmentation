@@ -4,6 +4,7 @@ from keras.optimizers import *
 import matplotlib.pyplot as plt
 import cv2
 import numpy as np
+import os
 
 class FcnModel():
     def __init__(self, n_class, input_height, input_width, model_version=32):
