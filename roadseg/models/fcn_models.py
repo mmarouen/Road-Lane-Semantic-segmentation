@@ -92,7 +92,7 @@ class FcnModel():
     def fit(self, optimizer, lr):
         if optimizer == "Adam":
             self.model.compile(loss='binary_crossentropy',optimizer=Adam(lr=lr),metrics=['acc'])
-        history = fcn_model.model.fit(x=X_train, y=y_train, epochs=10, batch_size=10, validation_data=(X_val, y_val))
+        history = self.model.fit(x=X_train, y=y_train, epochs=10, batch_size=10, validation_data=(X_val, y_val))
         return history
     
     def plot_perf(self, history, plot_path):
