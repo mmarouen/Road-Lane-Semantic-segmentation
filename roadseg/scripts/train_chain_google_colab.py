@@ -26,11 +26,11 @@ def train_model(config: ConfigReader):
     fcn_model = FcnModel(config.n_class, config.input_height, config.input_width, config.weights_path)
     print(fcn_model.model.summary())
 '''
-    
 
 def main():
     args = parse_arguments()
     train_config = ConfigReader(args.config)
+    print(train_config.data_path)
     #train_model(train_config)
 
 if __name__ == '__main__':
