@@ -10,7 +10,7 @@ class DataUtils():
   def __init__(self, data_url, weights_url):
     self.data_url = data_url
     self.weights_url = weights_url
-
+  
   def get(self, data_folder, n_classes, input_height, input_width):
 
     subprocess.call("/media/marouen/DataDisk/mongit/Road-Lane-Semantic-segmentation/load_from_gdrive.sh %s %s"%(self.data_url, self.weights_url), shell=True)
