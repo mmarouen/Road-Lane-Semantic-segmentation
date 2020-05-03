@@ -1,5 +1,7 @@
 from keras.layers import Conv2D, MaxPooling2D, Input, Dropout, Activation, Permute, Reshape, Conv2DTranspose
 from keras.models import Model
+from keras.optimizers import *
+import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 
@@ -86,5 +88,34 @@ class FcnModel():
         im_pred = cv2.resize(im_pred,(self.input_height,self.input_width))
         im_pred=np.asarray(im_pred,np.uint8)
         return im_bgd,im_pred
+    
+    def fit(self, optimizer, lr):
+        if optimizer == "Adam":
+            self.model.compile(loss='binary_crossentropy',optimizer=Adam(lr=lr),metrics=['acc'])
+        history = fcn_model.model.fit(x=X_train, y=y_train, epochs=10, batch_size=10, validation_data=(X_val, y_val))
+        return history
+    
+    def plot_perf(self, history, plot_path):
+        acc = history.history['acc']
+        val_acc = history.history['val_acc']
+        loss = history.history['loss']
+        val_loss = history.history['val_loss']
+        epochs = range(len(acc))
+
+        fig, ax = plt.subplots(1,2)
+
+        ax[0].plot(epochs, acc, 'bo', label='Training acc')
+        ax[0].plot(epochs, val_acc, 'b', label='Validation acc')
+        ax[0].set_title('Training and validation accuracy')
+        ax[0].legend()
+        fig.suptitle('model performance')
+        ax[1].plot(epochs, loss, 'bo', label='Training loss')
+        ax[1].plot(epochs, val_loss, 'b', label='Validation loss')
+        ax[1].set_title('Training and validation loss')
+        ax[1].legend()
+        plt.savefig(os.path.join(plot_path,"training_perf.png"))
+        plt.close()
+
+
 
 

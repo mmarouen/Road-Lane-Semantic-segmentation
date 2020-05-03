@@ -3,11 +3,11 @@ import json
 class ConfigReader():
     def __init__(self, filename):
         self.config = self.read_file(filename)
-    
+
     def read_file(self, filename):
         with open(filename, "r") as f:
             return json.load(f)
-    
+
     @property
     def data_path(self):
         return self.config["data_path"]
@@ -15,11 +15,11 @@ class ConfigReader():
     @property
     def weights_path(self):
         return self.config["weights_path"]
-    
+
     @property
     def augment_data(self):
         return self.config["augment_data"]
-    
+
     @property
     def model_name(self):
         return self.config["model_name"]
@@ -35,3 +35,11 @@ class ConfigReader():
     @property
     def input_height(self):
         return self.config["input_height"]
+
+    @property
+    def optimizer(self):
+        return self.config["model_optimizer"]
+
+    @property
+    def lr(self):
+        return self.config["model_lr"]

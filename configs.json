@@ -7,5 +7,7 @@
     "model_name":"fcn8",
     "input_width":576,
     "input_height":160,
-    "n_classes":2
+    "n_classes":2,
+    "model_lr":1e-4,
+    "model_optimizer":"Adam"
 }
