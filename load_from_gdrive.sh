@@ -3,6 +3,7 @@ cd $PWD
 export data_file_id=$(cut -d "=" -f2 <<< $1)
 export weights_file_id=$(cut -d "=" -f2 <<< $2)
 export data_file_name=data_road.zip
+export data_folder_name=data_road
 export weights_file_name="weights/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5"
 
 download_data () {
@@ -10,7 +11,7 @@ download_data () {
     wget -q --show-progress --save-cookies cookies.txt 'https://docs.google.com/uc?export=download&id='$data_file_id -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1/p' > confirm.txt
     wget -q --show-progress --load-cookies cookies.txt -O $data_file_name 'https://docs.google.com/uc?export=download&id='$data_file_id'&confirm='$(<confirm.txt)
     unzip -q $data_file_name
-    mv $data_file_name data
+    mv $data_folder_name data
     rm $data_file_name cookies.txt confirm.txt
 }
 
