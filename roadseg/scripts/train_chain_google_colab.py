@@ -19,7 +19,7 @@ def train_model(config: ConfigReader):
     
     if config.augment_data:
         X_train,y_train = data_handler.augment_training_data(X_train,y_train, config.n_class, config.input_height, config.input_width)
-    print("training data shape: {0}".format(X.shape))
+    print("training data shape: {0}".format(X_train.shape))
 
     # build model
     if config.model_name =="fcn8":
