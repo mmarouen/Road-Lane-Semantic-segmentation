@@ -14,21 +14,26 @@ def train_model(config: ConfigReader):
 
     # load data
     data_handler = DataUtils(config.data_path, config.weights_path)
-    X_train, y_train = data_handler.get("data/training", config.n_class, config.input_height, config.input_width)
+    X_train,y_train = data_handler.get("data/training", config.n_class, config.input_height, config.input_width)
     if config.augment_data:
-        X_train, y_train = data_handler.augment_training_data(X_train, y_train, config.n_class, config.input_height, config.input_width)
+        X_train,y_train = data_handler.augment_training_data(X_train,y_train, config.n_class, config.input_height, config.input_width)
     print("training data shape: {0}".format(X_train.shape))
 
     X_val, y_val = data_handler.get("data/validation", config.n_class, config.input_height, config.input_width)
     print("validation data shape: {0}".format(X_val.shape))
 
-    # build model
+    # build and save model
     if config.model_name =="fcn8":
         model_version = 8
     fcn_model = FcnModel(config.n_class, config.input_height, config.input_width, config.weights_path)
-    print(fcn_model.model.summary())
-    
-    
+    history = fcn_model.fit(X_train, y_train, X_val, y_val, config.optimizer, config.lr)
+    model_path = os.path.join(os.getcwd(),"models")
+    if not os.path.exists(model_path):
+        os.mkdir(model_path)
+    fcn_model.model.save(os.path.join(model_path,"fcn32.h5"))
+
+    plot_path = os.path.join(os.getcwd(),"plots")
+    fcn_model.plot_perf(history, plot_path)
 
 def main():
     args = parse_arguments()
