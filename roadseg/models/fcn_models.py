@@ -103,8 +103,10 @@ class FcnModel():
         val_loss = history.history['val_loss']
         epochs = range(len(acc))
 
-        fig, ax = plt.subplots(1,2)
+        if not os.path.exists(plot_path):
+            os.mkdir(plot_path)
 
+        fig, ax = plt.subplots(1,2)
         ax[0].plot(epochs, acc, 'bo', label='Training acc')
         ax[0].plot(epochs, val_acc, 'b', label='Validation acc')
         ax[0].set_title('Training and validation accuracy')
