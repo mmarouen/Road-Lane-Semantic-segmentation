@@ -14,10 +14,13 @@ def train_model(config: ConfigReader):
 
     # load data
     data_handler = DataUtils(config.data_path, config.weights_path)
-    X,y = data_handler.get(config.n_class, config.input_height, config.input_width)
+    X_train, y_train = data_handler.get("data/training", config.n_class, config.input_height, config.input_width)
     if config.augment_data:
-        X,y = data_handler.augment_training_data(X, y, config.n_class, config.input_height, config.input_width)
-    print("training data shape: {0}".format(X.shape))
+        X_train, y_train = data_handler.augment_training_data(X_train, y_train, config.n_class, config.input_height, config.input_width)
+    print("training data shape: {0}".format(X_train.shape))
+
+    X_val, y_val = data_handler.get("data/validation", config.n_class, config.input_height, config.input_width)
+    print("validation data shape: {0}".format(X_val.shape))
 
     # build model
     if config.model_name =="fcn8":
