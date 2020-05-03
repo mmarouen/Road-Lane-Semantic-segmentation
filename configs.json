@@ -1,0 +1,11 @@
+{
+    "data_path":"https://drive.google.com/open?id=1v4CQv1Q3eag8xRwG1cgbcD-CXjzJHmXu",
+    "_help_data_path":"Path to zip file containing train/val/test data",
+    "weights_path":"https://drive.google.com/open?id=1uyOrTF7oxL2dyFQh9iQ81hIzPJlEl2KH",
+    "_help_weights_path":"Path to FCN weights",
+    "augment_data":true,
+    "model_name":"fcn8",
+    "input_width":576,
+    "input_height":160,
+    "n_classes":2
+}
